@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IALab · Para la investigación y la innovación en educación</title>
+<meta name="description" content="Un laboratorio de reflexión, investigación y divulgación sobre inteligencia artificial en educación, con foco en Latinoamérica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   IALab - Hoja de estilos
+   Paleta: cuatro colores del logo, administrados con cuidado
+   Tipografía: Fraunces (serif) + Inter (sans-serif)
+   ========================================================= */
+
+:root {
+  /* Colores del logo */
+  --c-azul: #4169E1;
+  --c-rosa: #E85A9B;
+  --c-verde: #3FB89A;
+  --c-amarillo: #F5C842;
+
+  /* Versiones suaves para fondos */
+  --c-azul-suave: #EEF2FA;
+  --c-rosa-suave: #FCE4EC;
+  --c-verde-suave: #E4F4EF;
+  --c-amarillo-suave: #FFF8E1;
+
+  /* Versiones oscuras para texto sobre suaves */
+  --c-azul-texto: #1F3A93;
+  --c-rosa-texto: #8B2957;
+  --c-verde-texto: #1F6B4A;
+  --c-amarillo-texto: #8A6A00;
+
+  /* Neutros */
+  --fondo: #FAFAF7;
+  --fondo-blanco: #FFFFFF;
+  --texto: #1A1A1A;
+  --texto-suave: #5A5A56;
+  --texto-tenue: #8A8A82;
+  --borde: #E5E3DB;
+  --borde-fuerte: #CFCDC3;
+
+  /* Tipografías */
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--texto);
+  background: var(--fondo);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ----- NAVEGACIÓN ----- */
+.nav {
+  position: sticky;
+  top: 0;
+  background: rgba(250, 250, 247, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 0.5px solid var(--borde);
+  z-index: 100;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--texto);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.nav-logo .ia { color: var(--c-azul); }
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+  font-family: var(--sans);
+  font-size: 14px;
+}
+.nav-links a {
+  color: var(--texto-suave);
+  text-decoration: none;
+  transition: color 0.15s;
+  padding: 4px 0;
+  border-bottom: 1.5px solid transparent;
+}
+.nav-links a:hover { color: var(--texto); }
+.nav-links a.active {
+  color: var(--texto);
+  border-bottom-color: var(--c-azul);
+}
+
+/* ----- CONTENEDORES ----- */
+.contenedor {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.contenedor-ancho {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.seccion { padding: 4rem 0; }
+.seccion-compacta { padding: 2.5rem 0; }
+
+/* ----- ELEMENTOS BASE ----- */
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+h1 { font-size: 42px; margin-bottom: 1rem; }
+h2 { font-size: 30px; margin: 2.5rem 0 1rem; }
+h3 { font-size: 21px; margin: 1.75rem 0 0.75rem; font-weight: 500; }
+
+p { margin-bottom: 1.1rem; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--c-azul-texto); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--c-azul); }
+
+.texto-suave { color: var(--texto-suave); }
+
+.epigrafe {
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+/* ----- PÍLDORAS DE CATEGORÍA ----- */
+.pill {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 11px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+.pill:hover { transform: translateY(-1px); }
+.pill.azul    { background: var(--c-azul-suave);    color: var(--c-azul-texto); }
+.pill.rosa    { background: var(--c-rosa-suave);    color: var(--c-rosa-texto); }
+.pill.verde   { background: var(--c-verde-suave);   color: var(--c-verde-texto); }
+.pill.amarillo { background: var(--c-amarillo-suave); color: var(--c-amarillo-texto); }
+
+/* ----- PORTADA (HERO) ----- */
+.hero {
+  padding: 5rem 0 3rem;
+  border-bottom: 0.5px solid var(--borde);
+}
+.hero-inner { display: grid; gap: 2rem; }
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.1;
+}
+.hero-lead {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--texto-suave);
+  font-family: var(--serif);
+}
+.hero-tag {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--c-azul);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-tag::before {
+  content: "";
+  width: 24px; height: 2px;
+  background: var(--c-azul);
+  display: inline-block;
+}
+
+.hero-acciones {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.btn {
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-primario {
+  background: var(--texto);
+  color: var(--fondo);
+}
+.btn-primario:hover { background: #000; color: var(--fondo); }
+.btn-secundario {
+  background: transparent;
+  color: var(--texto);
+  border-color: var(--borde-fuerte);
+}
+.btn-secundario:hover { border-color: var(--texto); }
+
+/* ----- TARJETAS DE REFLEXIÓN ----- */
+.grid-reflexiones {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  margin-top: 2rem;
+}
+@media (min-width: 720px) {
+  .grid-reflexiones { grid-template-columns: repeat(3, 1fr); }
+}
+
+.tarjeta {
+  background: var(--fondo-blanco);
+  border: 0.5px solid var(--borde);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.tarjeta:hover {
+  border-color: var(--borde-fuerte);
+  transform: translateY(-2px);
+  color: inherit;
+}
+.tarjeta h3 {
+  font-size: 19px;
+  margin: 0;
+  line-height: 1.3;
+}
+.tarjeta-meta {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--texto-tenue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 0.5px solid var(--borde);
+}
+.tarjeta-resumen {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--texto-suave);
+  margin: 0;
+}
+
+/* ----- MANIFIESTO ----- */
+.manifiesto h2 {
+  font-size: 26px;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 0.5px solid var(--borde);
+}
+.manifiesto h2:first-of-type { margin-top: 2rem; border-top: none; padding-top: 0; }
+.manifiesto p { font-size: 17px; }
+.manifiesto .cita {
+  font-style: italic;
+  color: var(--texto-suave);
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--c-azul);
+  margin: 1.5rem 0;
+}
+.manifiesto ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+}
+.manifiesto li {
+  margin-bottom: 0.85rem;
+  padding-left: 0.25rem;
+}
+
+/* ----- ENTRADA INDIVIDUAL (preview) ----- */
+.entrada-header {
+  padding: 3rem 0 2rem;
+  border-bottom: 0.5px solid var(--borde);
+  margin-bottom: 2.5rem;
+}
+.entrada-header h1 { font-size: 36px; margin: 0.75rem 0; }
+.entrada-meta {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--texto-tenue);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ----- RECURSOS (vacío con dignidad) ----- */
+.aviso-construccion {
+  background: var(--c-amarillo-suave);
+  border: 0.5px solid var(--c-amarillo);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+.aviso-construccion p {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--c-amarillo-texto);
+  margin: 0;
+}
+
+/* ----- COMUNIDAD / CONTACTO ----- */
+.contacto-bloque {
+  background: var(--fondo-blanco);
+  border: 0.5px solid var(--borde);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+.contacto-bloque h3 { margin-top: 0; }
+
+/* ----- BIBLIOGRAFÍA APA ----- */
+.referencias { margin-top: 1.5rem; }
+.referencias .ref {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.55;
+  padding-left: 2em;
+  text-indent: -2em;
+  margin-bottom: 1rem;
+  color: var(--texto-suave);
+}
+.referencias .ref a {
+  word-break: break-word;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--c-azul-texto);
+}
+.referencias .ref em { font-style: italic; }
+
+/* ----- PIE ----- */
+.pie {
+  margin-top: 4rem;
+  padding: 3rem 0 2rem;
+  border-top: 0.5px solid var(--borde);
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--texto-tenue);
+}
+.pie-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+@media (max-width: 540px) {
+  .pie-inner div:last-child { text-align: left !important; }
+}
+
+/* ----- VISIBILIDAD DE SECCIONES (simula multi-página) ----- */
+.seccion-pagina { display: none; }
+.seccion-pagina.activa { display: block; }
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 680px) {
+  h1 { font-size: 32px; }
+  .hero h1 { font-size: 36px; }
+  h2 { font-size: 25px; }
+  h3 { font-size: 19px; }
+  .hero-lead { font-size: 18px; }
+  .nav-inner { padding: 0.75rem 1rem; }
+  .nav-links { gap: 1.1rem; font-size: 13px; }
+  .seccion { padding: 2.5rem 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- =================== NAVEGACIÓN =================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo" onclick="mostrar('inicio')">
+      <span class="ia">IA</span>Lab
+    </a>
+    <ul class="nav-links">
+      <li><a href="#inicio" onclick="mostrar('inicio')" class="active" data-pagina="inicio">Inicio</a></li>
+      <li><a href="#manifiesto" onclick="mostrar('manifiesto')" data-pagina="manifiesto">Manifiesto</a></li>
+      <li><a href="#reflexiones" onclick="mostrar('reflexiones')" data-pagina="reflexiones">Reflexiones</a></li>
+      <li><a href="#recursos" onclick="mostrar('recursos')" data-pagina="recursos">Recursos</a></li>
+      <li><a href="#comunidad" onclick="mostrar('comunidad')" data-pagina="comunidad">Comunidad</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- =================== INICIO =================== -->
+<section id="inicio" class="seccion-pagina activa">
+  <div class="hero">
+    <div class="contenedor">
+      <div class="hero-inner">
+        <span class="hero-tag">IALab · Latinoamérica · 2026</span>
+        <h1>Un laboratorio para pensar la inteligencia artificial en educación.</h1>
+        <p class="hero-lead">La IA puede potenciar el conocimiento humano, pero solo con agencia, comunidad y una ética que atraviese las decisiones cotidianas. Sin esos tres elementos, no amplifica el aprendizaje: lo sustituye por algo que se le parece.</p>
+        <div class="hero-acciones">
+          <a href="#manifiesto" class="btn btn-primario" onclick="mostrar('manifiesto')">Leer el manifiesto</a>
+          <a href="#reflexiones" class="btn btn-secundario" onclick="mostrar('reflexiones')">Ver reflexiones</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seccion">
+    <div class="contenedor">
+      <span class="epigrafe">Últimas reflexiones</span>
+      <h2 style="margin-top: 0;">Lo que estamos pensando</h2>
+      <p class="texto-suave">Ensayos, lecturas críticas y notas breves sobre IA, desarrollo humano y educación. Tres líneas de trabajo están activas ahora mismo.</p>
+
+      <div class="grid-reflexiones">
+        <a href="#entrada" class="tarjeta" onclick="mostrar('entrada')">
+          <span class="pill azul">Posplagiarismo</span>
+          <h3>Cuando la detección deja de tener sentido</h3>
+          <p class="tarjeta-resumen">Una lectura latinoamericana de la propuesta de Sarah Elaine Eaton sobre el fin del paradigma de la detección y lo que viene después.</p>
+          <div class="tarjeta-meta">
+            <span>8 min de lectura</span>
+            <span>Marzo 2026</span>
+          </div>
+        </a>
+
+        <a href="#" class="tarjeta" onclick="event.preventDefault()">
+          <span class="pill rosa">Niñez</span>
+          <h3>Agencia en formación: qué protegemos cuando decimos "desarrollo"</h3>
+          <p class="tarjeta-resumen">La literatura sobre SDL con IA asume un sujeto ya autónomo. ¿Qué ocurre cuando la autonomía está justo construyéndose?</p>
+          <div class="tarjeta-meta">
+            <span>12 min de lectura</span>
+            <span>Próximamente</span>
+          </div>
+        </a>
+
+        <a href="#" class="tarjeta" onclick="event.preventDefault()">
+          <span class="pill verde">Docencia</span>
+          <h3>El docente como mediador ético: una figura por construir</h3>
+          <p class="tarjeta-resumen">Los marcos de UNESCO y OECD hablan de competencias. Falta decir lo más difícil: que mediar éticamente es un oficio.</p>
+          <div class="tarjeta-meta">
+            <span>10 min de lectura</span>
+            <span>Próximamente</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MANIFIESTO =================== -->
+<section id="manifiesto" class="seccion-pagina">
+  <div class="seccion">
+    <div class="contenedor">
+      <span class="epigrafe">Manifiesto</span>
+      <h1>Por qué existe este laboratorio</h1>
+      <p class="hero-lead" style="margin-top: 0.5rem;">La brújula del IALab: qué es, desde dónde piensa, qué le preocupa y a quién se dirige.</p>
+
+      <div class="manifiesto">
+        <h2>Qué es el IALab</h2>
+        <p>El IALab es un laboratorio de reflexión, investigación y divulgación sobre inteligencia artificial en educación, con foco en Colombia y Latinoamérica. Produce recursos abiertos, conversaciones y marcos de trabajo dirigidos a docentes, investigadores y quienes toman decisiones de política educativa.</p>
+        <p>Es una iniciativa personal que aspira a construirse en red —con instituciones, colegas y comunidades que compartan una preocupación común por el lugar del ser humano en la era de la inteligencia artificial.</p>
+
+        <h2>Desde dónde piensa</h2>
+        <p>Desde una convicción: la IA puede potenciar el conocimiento humano de maneras que apenas comenzamos a comprender. Y desde una inquietud que le da forma al trabajo: ese potencial no se realiza solo. Sin agencia, sin comunidad y sin una ética que atraviese las decisiones cotidianas, la IA no amplifica el aprendizaje —lo sustituye por algo que se le parece.</p>
+        <p>El laboratorio piensa en un cruce poco transitado: el de la <em>psicología del desarrollo</em>, la <em>filosofía</em> y las <em>ciencias de la educación</em>. Ese cruce no es decorativo. Determina las preguntas que hacemos. La mayoría de la conversación pública sobre IA y educación se ocupa de cómo integrar la tecnología en el aula, qué herramientas usar, cómo detectar su uso. El IALab se ocupa de una pregunta anterior y más lenta:</p>
+        <p class="cita">¿Qué le ocurre al sujeto humano en formación —al niño, al adolescente, al docente que enseña— cuando aprende, crea y se relaciona con sistemas que generan respuestas plausibles sin comprender lo que dicen?</p>
+        <p>Esta pregunta se apoya en tres conversaciones teóricas que el laboratorio toma en serio y pone a dialogar:</p>
+        <ul>
+          <li>La noción de <strong>posplagiarismo</strong> propuesta por Sarah Elaine Eaton, que nos invita a dejar de librar una guerra perdida contra la detección y a repensar qué significa aprender, crear y atribuir cuando la coautoría con IA es parte del paisaje cotidiano. El posplagiarismo no es permisividad: es una exigencia ética más alta, porque desplaza el peso desde el control externo hacia la responsabilidad del sujeto.</li>
+          <li>La investigación sobre <strong>aprendizaje autodirigido (SDL)</strong> con IA, sistematizada por Roe y Perkins, que describe las promesas y los riesgos de aprender con sistemas generativos: personalización y apoyo continuo, pero también sobredependencia, erosión de la motivación intrínseca y empobrecimiento del vínculo pedagógico. Leemos esta literatura desde la psicología del desarrollo, atentos a lo que se juega cuando quien aprende así todavía está formando su autonomía.</li>
+          <li>Los <strong>marcos de OECD y UNESCO</strong> sobre desarrollo profesional docente y uso responsable de IA, que tomamos como referencia y al mismo tiempo como objeto de traducción crítica. Los marcos globales no se aplican: se interpretan, se contextualizan, se tensionan con las realidades de nuestras aulas, nuestros recursos y nuestras trayectorias.</li>
+        </ul>
+        <p>Sobre estos tres pilares atraviesa algo que no es un cuarto pilar sino un modo de estar: una <em>ética transversal</em>. No entendida como código de conducta ni como cláusula de cumplimiento, sino como sensibilidad práctica —la capacidad de preguntarse, en cada decisión pedagógica, a quién sirve, qué protege y qué pone en riesgo.</p>
+
+        <h2>Qué le preocupa</h2>
+        <p>Al laboratorio le preocupan dos cosas, y no son dos: son la misma vista desde ángulos distintos.</p>
+        <p>Le preocupa <strong>el sujeto humano en formación</strong>. Los niños y adolescentes que hoy aprenden a pensar, a escribir y a convivir, lo harán en interacción con sistemas que todavía no comprendemos bien. Queremos saber qué le ocurre a la atención, al lenguaje, al vínculo y al sentido de agencia cuando la IA se convierte en compañía cotidiana de la vida escolar y familiar.</p>
+        <p>Y le preocupa <strong>el docente como mediador ético</strong>. Es el docente —no el algoritmo, no la política, no la herramienta— quien está en la posición más cercana y más decisiva para proteger la agencia de sus estudiantes, modelar un uso reflexivo de la IA y abrir o cerrar posibilidades creativas. El foco inicial del IALab es acompañar a los docentes en ese papel, reconociendo que se les está pidiendo mediar una transformación para la que pocos recibieron preparación.</p>
+
+        <h2>A quién se dirige</h2>
+        <p>A <strong>docentes</strong> de todos los niveles educativos que median entre la IA y sus estudiantes, y que quieren hacerlo con criterio, no con ansiedad ni con entusiasmo acrítico.</p>
+        <p>A <strong>familias y cuidadores</strong> que acompañan el crecimiento de niños y adolescentes en un entorno donde la IA ya forma parte de la vida cotidiana, y que buscan orientación para sostener ese acompañamiento con lucidez.</p>
+        <p>A <strong>estudiantes</strong> —de cualquier edad— interesados en aprender con IA de manera autónoma, crítica y creativa, sin renunciar a su propia voz en el proceso.</p>
+        <p>A <strong>investigadores</strong> que exploran este territorio en formación y buscan interlocución desde miradas interdisciplinarias.</p>
+        <p>A <strong>quienes formulan política educativa</strong> en contextos latinoamericanos y necesitan referentes que no se limiten a traducir directrices globales sino que piensen desde nuestras condiciones.</p>
+
+        <h2>Qué hace</h2>
+        <p>El IALab se propone cuatro cosas, en orden de madurez:</p>
+        <ul>
+          <li><strong>Divulgar reflexiones e investigación propia</strong> sobre el cruce entre IA, desarrollo humano y educación.</li>
+          <li><strong>Producir recursos abiertos</strong> —guías, marcos, rúbricas, preguntas— que ayuden a docentes y otros actores a tomar decisiones más lúcidas.</li>
+          <li><strong>Formar y acompañar</strong> a docentes interesados en desarrollar sensibilidad ética y competencia práctica en el uso de IA.</li>
+          <li><strong>Tejer comunidad y red</strong> con instituciones, colegas y colectivos que compartan estas preguntas.</li>
+        </ul>
+        <p>Hoy el laboratorio comienza por la primera. Las otras tres crecerán conforme el trabajo madure y se encuentren los compañeros de camino.</p>
+
+        <h2>Qué no es</h2>
+        <p>El IALab no es una consultoría tecnológica ni un observatorio neutral. Tiene posiciones. Cree que la educación es un bien público, que la agencia se cultiva y no se descarga, y que la prisa por adoptar herramientas no debe desplazar la lentitud necesaria para pensarlas.</p>
+        <p>No es tampoco un espacio de tecnofobia. Cree que evadir la IA es hoy una forma de abandonar a los estudiantes.</p>
+        <p>No es un repositorio de "mejores prácticas". Las prácticas se construyen en contexto; lo que el laboratorio ofrece son marcos, preguntas y compañía.</p>
+        <p>No es, por ahora, un colectivo. Es una iniciativa personal que escribe en voz abierta, con la esperanza de que la conversación genere comunidad.</p>
+
+        <h2>Una invitación</h2>
+        <p>La IA no va a esperar a que terminemos de entenderla. Eso no significa que debamos dejar de pensarla: significa que hay que pensarla en movimiento, en comunidad y con honestidad sobre lo que no sabemos.</p>
+        <p>Si algo de lo que aquí se propone resuena con tu trabajo, tu aula o tu pregunta, este laboratorio está abierto. No porque tenga respuestas, sino porque cree que las buenas preguntas se piensan mejor acompañadas.</p>
+
+        <h2>Referencias y lecturas clave</h2>
+        <p class="texto-suave" style="font-size: 15px; margin-bottom: 1.5rem;">El marco de trabajo del IALab se apoya en las siguientes fuentes, que se recomiendan como lecturas de entrada para quien quiera profundizar en los pilares teóricos del laboratorio.</p>
+        <div class="referencias">
+          <p class="ref">Eaton, S. E. (2023). Postplagiarism: Transdisciplinary ethics and integrity in the age of artificial intelligence and neurotechnology. <em>International Journal for Educational Integrity</em>, <em>19</em>, Artículo 23. <a href="https://doi.org/10.1007/s40979-023-00144-1" target="_blank" rel="noopener">https://doi.org/10.1007/s40979-023-00144-1</a></p>
+
+          <p class="ref">Miao, F., &amp; Cukurova, M. (2024). <em>AI competency framework for teachers</em>. UNESCO. <a href="https://doi.org/10.54675/ZJTE2084" target="_blank" rel="noopener">https://doi.org/10.54675/ZJTE2084</a></p>
+
+          <p class="ref">Miao, F., &amp; Shiohira, K. (2024). <em>AI competency framework for students</em>. UNESCO. <a href="https://doi.org/10.54675/JKJB9835" target="_blank" rel="noopener">https://doi.org/10.54675/JKJB9835</a></p>
+
+          <p class="ref">OECD. (2023). Opportunities, guidelines and guardrails for effective and equitable use of AI in education. En <em>OECD digital education outlook 2023: Towards an effective digital education ecosystem</em> (pp. 209–240). OECD Publishing. <a href="https://doi.org/10.1787/c74f03de-en" target="_blank" rel="noopener">https://doi.org/10.1787/c74f03de-en</a></p>
+
+          <p class="ref">OECD. (2024). <em>Education policy outlook 2024: Reshaping teaching into a thriving profession from ABCs to AI</em>. OECD Publishing. <a href="https://doi.org/10.1787/dd5140e4-en" target="_blank" rel="noopener">https://doi.org/10.1787/dd5140e4-en</a></p>
+
+          <p class="ref">Roe, J., &amp; Perkins, M. (2025). Generative AI in self-directed learning: A thematic scoping review. <em>Interactive Learning Environments</em>. Publicación anticipada en línea. <a href="https://doi.org/10.1080/10494820.2025.2603431" target="_blank" rel="noopener">https://doi.org/10.1080/10494820.2025.2603431</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== REFLEXIONES =================== -->
+<section id="reflexiones" class="seccion-pagina">
+  <div class="seccion">
+    <div class="contenedor">
+      <span class="epigrafe">Reflexiones</span>
+      <h1>Ensayos, notas y lecturas críticas</h1>
+      <p class="hero-lead" style="margin-top: 0.5rem;">Escritos sobre el cruce entre inteligencia artificial, desarrollo humano y educación. Cuatro líneas de trabajo, cada una con su color.</p>
+
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0 2.5rem;">
+        <span class="pill azul">Posplagiarismo</span>
+        <span class="pill rosa">Niñez y desarrollo</span>
+        <span class="pill verde">Docencia</span>
+        <span class="pill amarillo">Política educativa</span>
+      </div>
+
+      <div class="grid-reflexiones" style="grid-template-columns: 1fr;">
+        <a href="#entrada" class="tarjeta" onclick="mostrar('entrada')">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+            <span class="pill azul">Posplagiarismo</span>
+            <span style="font-family: var(--sans); font-size: 12px; color: var(--texto-tenue);">Marzo 2026</span>
+          </div>
+          <h3>Cuando la detección deja de tener sentido</h3>
+          <p class="tarjeta-resumen">Una lectura latinoamericana de la propuesta de Sarah Elaine Eaton sobre el fin del paradigma de la detección y lo que viene después. ¿Qué significa enseñar integridad cuando la coautoría con IA es parte del paisaje?</p>
+          <div class="tarjeta-meta">
+            <span>8 min de lectura</span>
+            <span>Leer →</span>
+          </div>
+        </a>
+
+        <div class="tarjeta" style="opacity: 0.7;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+            <span class="pill rosa">Niñez y desarrollo</span>
+            <span style="font-family: var(--sans); font-size: 12px; color: var(--texto-tenue);">Próximamente</span>
+          </div>
+          <h3>Agencia en formación: qué protegemos cuando decimos "desarrollo"</h3>
+          <p class="tarjeta-resumen">La literatura sobre SDL con IA asume un sujeto ya autónomo. ¿Qué ocurre cuando la autonomía está justo construyéndose? Una lectura desde la psicología del desarrollo.</p>
+          <div class="tarjeta-meta">
+            <span>12 min · Borrador</span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="tarjeta" style="opacity: 0.7;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+            <span class="pill verde">Docencia</span>
+            <span style="font-family: var(--sans); font-size: 12px; color: var(--texto-tenue);">Próximamente</span>
+          </div>
+          <h3>El docente como mediador ético: una figura por construir</h3>
+          <p class="tarjeta-resumen">Los marcos de UNESCO y OECD hablan de competencias docentes en IA. Falta decir lo más difícil: que mediar éticamente no es una competencia, es un oficio.</p>
+          <div class="tarjeta-meta">
+            <span>10 min · Borrador</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ENTRADA INDIVIDUAL =================== -->
+<section id="entrada" class="seccion-pagina">
+  <div class="contenedor">
+    <div class="entrada-header">
+      <div class="entrada-meta">
+        <span class="pill azul">Posplagiarismo</span>
+        <span>8 min de lectura</span>
+        <span>Marzo 2026</span>
+      </div>
+      <h1>Cuando la detección deja de tener sentido</h1>
+      <p class="texto-suave" style="font-size: 18px; margin-top: 0.5rem;">Una lectura latinoamericana de la propuesta de Sarah Elaine Eaton sobre el fin del paradigma de la detección y lo que viene después.</p>
+    </div>
+
+    <div>
+      <p>Entre 2023 y 2025, muchas instituciones educativas latinoamericanas compraron, probaron o adoptaron herramientas de detección de IA. Algunas todavía las usan. La mayoría descubrió, más temprano que tarde, lo que Sarah Elaine Eaton había anticipado en 2023: que la detección —como estrategia central para sostener la integridad académica en la era de la inteligencia artificial generativa— es una guerra perdida.</p>
+      <p>Esta afirmación puede sonar derrotista. No lo es. Es una invitación a mover el problema a otro lugar.</p>
+
+      <h3>La tesis del posplagiarismo</h3>
+      <p>Eaton propone pensar nuestra época como un momento <em>posplagiarismo</em>: no porque el plagio haya dejado de importar, sino porque el marco tradicional —basado en la detección de fragmentos copiados sin atribución— se vuelve insuficiente cuando una parte creciente del texto que circula en las aulas es producto de una coautoría entre humanos y sistemas generativos.</p>
+      <p>Lo interesante de la propuesta no es su diagnóstico tecnológico, que hoy comparte mucha gente. Es su giro ético: el posplagiarismo no afloja las exigencias, las endurece. Desplaza el peso desde la vigilancia externa hacia la responsabilidad del sujeto. Le pide al estudiante que sepa qué hizo con ayuda, qué hizo solo, qué entiende y qué no. Le pide al docente que diseñe evaluaciones que permitan ver el pensamiento, no solo verificar el producto.</p>
+
+      <h3>Qué ocurre cuando esto llega a Latinoamérica</h3>
+      <p>El marco de Eaton es generativo, pero también es situado. Fue pensado desde contextos universitarios anglófonos con recursos, marcos institucionales sólidos y tradiciones pedagógicas específicas. Leerlo desde América Latina supone hacer tres traducciones.</p>
+      <p>Esta es una entrada de demostración. El texto completo se publicará cuando el laboratorio esté en funcionamiento.</p>
+
+      <p style="margin-top: 2rem; padding-top: 1.5rem; border-top: 0.5px solid var(--borde); font-family: var(--sans); font-size: 14px; color: var(--texto-suave);">
+        Referencias citadas: Eaton (2023). <em>Postplagiarism: transdisciplinary ethics and integrity in the age of artificial intelligence and neurotechnology</em>. International Journal for Educational Integrity.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== RECURSOS =================== -->
+<section id="recursos" class="seccion-pagina">
+  <div class="seccion">
+    <div class="contenedor">
+      <span class="epigrafe">Recursos</span>
+      <h1>Marcos, guías y preguntas para el trabajo</h1>
+      <p class="hero-lead" style="margin-top: 0.5rem;">Materiales abiertos para docentes, familias e investigadores que trabajan con IA en contextos educativos.</p>
+
+      <div class="aviso-construccion">
+        <p><strong>Esta sección está en construcción.</strong> Los primeros recursos estarán disponibles en los próximos meses. Si hay algún tema específico sobre el que te gustaría contar con una guía, escríbenos.</p>
+      </div>
+
+      <h3>Líneas de trabajo previstas</h3>
+      <ul style="margin: 1rem 0 2rem 1.5rem;">
+        <li style="margin-bottom: 0.75rem;"><strong>Una rúbrica práctica</strong> para que docentes decidan cuándo y cómo integrar IA en actividades de aprendizaje, más allá del permitir o prohibir.</li>
+        <li style="margin-bottom: 0.75rem;"><strong>Una guía para familias</strong> sobre acompañamiento crítico del uso de IA en niños y adolescentes.</li>
+        <li style="margin-bottom: 0.75rem;"><strong>Un marco de preguntas</strong> para integridad académica en clave posplagiarismo, adaptado a contextos escolares y universitarios latinoamericanos.</li>
+        <li><strong>Una lectura crítica</strong> de las recomendaciones OECD y UNESCO sobre competencias docentes en IA, con notas para su contextualización local.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =================== COMUNIDAD =================== -->
+<section id="comunidad" class="seccion-pagina">
+  <div class="seccion">
+    <div class="contenedor">
+      <span class="epigrafe">Comunidad</span>
+      <h1>Conversemos</h1>
+      <p class="hero-lead" style="margin-top: 0.5rem;">Este laboratorio crece en compañía. Si algo de lo que aquí se propone resuena con tu trabajo o tu pregunta, queremos saberlo.</p>
+
+      <div class="contacto-bloque">
+        <h3>Escríbenos</h3>
+        <p>Para colaboraciones, invitaciones a hablar, preguntas, propuestas de lectura o simplemente para sumar una voz a la conversación.</p>
+        <p style="font-family: var(--sans); font-size: 13px; color: var(--texto-tenue); margin-top: 1rem;">Canal de contacto: disponible próximamente.</p>
+      </div>
+
+      <div class="contacto-bloque">
+        <h3>Instituciones interesadas en aliarse</h3>
+        <p>El IALab es una iniciativa personal con vocación de red. Universidades, colegios, organizaciones de formación docente o colectivos de investigación que compartan el marco de trabajo del laboratorio pueden proponer alianzas en torno a:</p>
+        <ul style="margin: 0.75rem 0 0 1.5rem;">
+          <li style="margin-bottom: 0.5rem;">Proyectos conjuntos de investigación</li>
+          <li style="margin-bottom: 0.5rem;">Formación docente en uso ético de IA</li>
+          <li style="margin-bottom: 0.5rem;">Producción colaborativa de recursos abiertos</li>
+          <li>Eventos, seminarios y conversatorios</li>
+        </ul>
+      </div>
+
+      <div class="contacto-bloque">
+        <h3>Suscríbete a las reflexiones</h3>
+        <p>Si prefieres recibir los textos nuevos por correo —una o dos veces al mes, sin ruido— puedes dejar tu dirección. La lista no se comparte y no tiene publicidad.</p>
+        <p style="font-family: var(--sans); font-size: 13px; color: var(--texto-tenue); margin-top: 1rem;">Formulario de suscripción: disponible próximamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PIE =================== -->
+<footer class="pie">
+  <div class="pie-inner">
+    <div style="flex: 1; min-width: 260px;">
+      <p style="margin: 0 0 0.5rem; font-weight: 500; color: var(--texto-suave);">IALab · Para la investigación y la innovación en educación</p>
+      <p style="margin: 0; font-size: 12px;">Recurso de divulgación ideado y elaborado por Camila Suárez Acevedo © 2026. Todos los derechos reservados.</p>
+    </div>
+    <div style="text-align: right; font-size: 12px;">
+      <p style="margin: 0;">Bogotá, Colombia</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function mostrar(pagina) {
+  // Oculta todas las secciones
+  document.querySelectorAll('.seccion-pagina').forEach(function(s) {
+    s.classList.remove('activa');
+  });
+  // Muestra la solicitada
+  var destino = document.getElementById(pagina);
+  if (destino) {
+    destino.classList.add('activa');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // Actualiza enlaces activos
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    a.classList.remove('active');
+    if (a.dataset.pagina === pagina) a.classList.add('active');
+  });
+}
+
+// Manejo del hash al cargar
+window.addEventListener('load', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) {
+    mostrar(hash);
+  }
+});
+</script>
+
+</body>
+</html>
